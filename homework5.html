@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			dl,dt,dd,ul,body {
+					margin: 0;
+					padding: 0;
+			}
+			.clearfix::after {
+				content: '';
+				display: block;
+				clear: both;
+			}
+			dt {
+				text-align: center;
+				vertical-align: middle;
+				width: 60px;
+				height: 30px;
+				background-color: #AACCFA;
+				float: left;
+			}
+			dd {
+				text-align: left;
+				vertical-align: middle;
+				height: 30px;
+				width: 400px;
+				background-color: #FEDBBB;
+				margin-left: 50px;
+			}
+			li {
+				margin-top: 5px;
+			}
+			.a {
+				width: 450px;
+				height: 30px;
+				background-color: #AAAAAA;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>选项卡</h1>
+		<input type="checkbox" id="all">全选/全不选 <button type="button" id="opposite">反选</button></br>
+		<input type="checkbox" class="option">苹果<br>
+		<input type="checkbox" class="option">榴莲<br>
+		<input type="checkbox" class="option">香蕉<br>
+		<input type="checkbox" class="option">橘子<br>
+		<input type="checkbox" class="option">西瓜<br>
+		<hr>
+		<h1>表单验证one</h1>
+		<form action="success.html" method="get">
+		姓名:<input type="text" name="" id="name" value="" /></br>
+		密码:<input type="password" name="" id="pwd" value="" /></br>
+		性别:<input type="radio" name="ren" id="sex">男&nbsp;&nbsp;<input type="radio" name="ren" id="sex1">女</br>
+		年龄:<select name="" id="hobby">
+			<option value="old">--请选择--</option>
+			<option value="1">15</option>
+			<option value="2">16</option>
+			<option value="3">17</option>
+			<option value="4">18</option>
+			<option value="5">19</option>
+			<option value="6">20</option>
+			<option value="7">21</option>
+			<option value="8">22</option>
+		</select></br>
+		爱好:<input type="checkbox" name="hobby" id="h1" value="" />读书&nbsp;<input type="checkbox" name="hobby" id="h2">音乐&nbsp;
+		<input type="checkbox" name="hobby" id="h3" value="" />上网</br>
+		简介:<textarea rows="10" cols="20" id="jianjie"></textarea></br>
+		<input type="submit" name="" id="btnOne" value="提交" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="重置">
+		</form>
+		<h1>表单验证TWO</h1>
+		<form action="success.html" method="get">
+			<dl class="clearfix">
+				<ul>
+					<li><dt>name</dt><dd><input type="text" name="" id="nameT" value="" /></dd></li>
+					<li><dt>pwd</dt><dd><input type="password" name="" id="pwdT" value="" /></dd></li>
+					<li><dt>sex</dt><dd><input type="radio" name="sexTwo" id="sexT" value="" />male&nbsp;<input type="radio" name="sexTwo" id="sexTwo">female</dd></li>
+					<li><dt>age</dt><dd><select name="" id="age">
+						<option value="old">--请选择--</option>
+						<option value ="1">1</option>
+						<option value ="2">2</option>
+						<option value ="3">3</option>
+					</select></dd></li>
+					<li><dt>course</dt><dd><input type="checkbox" name="courseOne" id="b1" value="" />Chinese&nbsp;<input type="checkbox" name="courseTwo" id="b2">Math&nbsp;<input type="checkbox" name="courseThree" id="b3">English</dd></li>
+					<li class="a"><input type="submit" name="" id="btnTwo" value="Submit it!" />&nbsp;&nbsp;<input type="reset" name="" id="" value="Reset it!" /></li>
+				
+				</ul>
+				
+			</dl>
+		</form>
+		<script>
+		//选项卡
+		const all = document.querySelector('#all')
+		const options = document.querySelectorAll('.option')
+		const opposite = document.querySelector('#opposite')
+		all.onclick=function () {
+			if(all.checked===true){
+				for(let i=0;i<options.length;i++){
+					options[i].checked=true;
+				}
+			}	
+			if(all.checked===false){
+				for(let i=0;i<options.length;i++){
+					options[i].checked=false;
+				}
+			 }
+		}
+		function t() {
+			if(options[0].checked===true && options[1].checked===true && options[2].checked===true && options[3].checked===true && options[4].checked===true){
+				all.checked=true;
+			}
+		}
+		function f() {
+			if(options[0].checked===false || options[1].checked===false || options[2].checked===false || options[3].checked===false || options[4].checked===false){
+				all.checked=false;
+			}
+		}
+		document.addEventListener('click',t)
+		document.addEventListener('click',f)
+		opposite.onclick=function(){
+			for(let i=0;i<options.length;i++){
+				if(options[i].checked===true){
+					options[i].checked=false;
+				}else{
+					options[i].checked=true;
+				}
+			}
+		}
+		//表单检验
+		 const btnOne = document.querySelector('#btnOne')
+		 const btnTwo = document.querySelector('#btnTwo')
+		 btnOne.onclick=function () {
+			 const name = document.querySelector('#name')
+			 const pwd1  = document.querySelector('#pwd')
+			 let   pwd = String(pwd1.value)
+			 const sex  = document.querySelector('#sex')
+			 const sex1  = document.querySelector('#sex1')
+			 const hobby = document.querySelector('#hobby')
+			 const jianjie = document.querySelector('#jianjie')
+			 const h1   =document.querySelector('#h1')
+			 const h2   =document.querySelector('#h2')
+			 const h3   =document.querySelector('#h3')
+			 console.log(pwd1.value)
+			 console.log(pwd)
+			 if (name.value ==='' || pwd.length<2 || pwd.length>10 || hobby.value ==='old'|| (sex.checked===false && sex1.checked===false) || (h1.checked===false && h2.checked===false && h3.checked===false) || jianjie.length<10 || jianjie.value===''){
+				 event.preventDefault();
+				 alert('提交表单1失败,你的输入有问题')
+			 }else {
+				 return ture;
+			 }
+		 }
+		btnTwo.onclick= function () {
+			const nameT = document.querySelector('#nameT')
+			const pwd3  = document.querySelector('#pwdT')
+			let   pwdT  = String(pwd3.value)
+			const sexT  = document.querySelector('#sexT')
+			const sexTwo  = document.querySelector('#sexTwo')
+			const age = document.querySelector('#age')
+			const b1   =document.querySelector('#b1')
+			const b2   =document.querySelector('#b2')
+			const b3   =document.querySelector('#b3') 
+			if(nameT.value ==='' || pwdT.length<2 || pwdT.length>10 || age.value ==='old'|| (sexT.checked===false && sexTwo.checked===false) || ((b1.checked===false && b2.checked===false) || (b2.checked===false&&b3.checked===false) || (b1.checked===false&&b3.checked===false)) ) {
+				event.preventDefault();
+				alert('提交表单2失败,你的输入有问题')
+			}else {
+				return ture;
+			}
+		}
+		</script>
+	</body>
+</html>
