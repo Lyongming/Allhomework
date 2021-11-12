@@ -16,7 +16,7 @@
 		<script>
 		// let num=0
 			$('.add').click(function(){
-				if(!$('#val').val()){
+				if($('#val').val()==''){
 					alert('还未填写内容')
 				}else{
 					// num++;
@@ -28,7 +28,7 @@
 				}
 			})
 			$('.clear').click(function(){
-				$('.list').remove()
+				$('.list').children().remove()
 			})
 			
 		</script>
